@@ -1,0 +1,14 @@
+FROM node:8.10.0-alpine
+
+WORKDIR /usr/app
+
+COPY . /usr/app
+
+# Skip proxy
+RUN npm config set strict-ssl false
+
+RUN cd /usr/app && npm install --production
+
+RUN npm install cross-env
+
+CMD [ "npm", "run", "dev" ]

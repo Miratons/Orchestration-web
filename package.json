@@ -1,6 +1,6 @@
 {
   "name": "orchestration-web",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "react": "^16.4.2",
@@ -9,8 +9,25 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "cross-env HOST_MAIN=localhost:8000 npx webpack-dev-server --host 0.0.0.0 --mode=production",
+    "build": "cross-env HOST_MAIN=back:8080 npx webpack-dev-server --host 0.0.0.0 --mode=production",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.0",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.7"
   }
 }

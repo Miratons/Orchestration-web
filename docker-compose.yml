@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+    dev:
+        build:
+          context: .
+          dockerfile: Dockerfile.dev
+        volumes:
+          - ./:/usr/app
+        environment:
+          - HOST_MAIN=localhost
+        ports:
+          - 3000:3000
+
+    prod:
+        build:
+            context: .
+            dockerfile: Dockerfile.prod
+        volumes:
+            - ./:/usr/app
+        ports:
+            - 3001:3000
+        environment:
+          - HOST_MAIN=192.168.25.26
