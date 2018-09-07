@@ -9,8 +9,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "cross-env HOST_MAIN=localhost:8000 npx webpack-dev-server --host 0.0.0.0 --mode=production",
-    "build": "cross-env HOST_MAIN=back:8080 npx webpack-dev-server --host 0.0.0.0 --mode=production",
+    "dev": "cross-env HOST_MAIN=localhost:4000 npx webpack-dev-server --host 0.0.0.0 --mode=developement",
+    "build": "cross-env HOST_MAIN=192.168.25.37:4000 npx webpack-dev-server --host 0.0.0.0 --mode=production",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
