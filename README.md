@@ -186,7 +186,7 @@ Pour le moment l'interconnexion des services ne fonctionne pas sur le nom des se
 
 Lors de l'extinction du PC, le cluster devient erroné et nécessite une réinstallation compléte de celui-ci. Un systeme de backup serait à prévoir.
 
-La taille des images peut devenir importante? L'upload sur le repo docker peut être fastidieu. Pour accélérer ce processus, l'installation d'un registre en local pour faciliter ce type de processus.
+La taille des images peut devenir importante ! L'upload sur le repo docker peut être fastidieu. Pour accélérer ce processus, l'installation d'un registre en local pour faciliter ce type de processus.
 
 Avec du temps supplémentaire, l'installation d'une intégration continue au sein du Swarm aurait permit une automatisation compléte de la monté de version d'une application.
 
