@@ -30,7 +30,7 @@ Cette commande nécessitera un commutateur externe. Il est nécessaire de le cr�
 
 **Attention**, le commutateur doit se positionner sur une carte réseau active. Sinon l’allocation d’adresse IP ne sera pas effective.
 
-**Attention**, l’ensemble des clusters créés par la suite seront assignés à ce commutateur. Si par malheur vous le désactiver (désactivation de la carte réseau associée), cela risque de modifier son fonctionnement. Pour ma part lorsque j’ai désactivé ma carte, le commutateur est passé du fonctionnement externe au fonctionnement interne. Ce qui a eu pour incidence d’empêcher l’assignation d’une adresse IP au redémarrage des clusters. Il faudra donc modifier ce commutateur en mode externe.
+**Attention**, l’ensemble des clusters créés par la suite seront assignés à ce commutateur. Si par malheur vous le désactivez (désactivation de la carte réseau associée), cela risque de modifier son fonctionnement. Pour ma part lorsque j’ai désactivé ma carte, le commutateur est passé du fonctionnement externe au fonctionnement interne. Ce qui a eu pour incidence d’empêcher l’assignation d’une adresse IP au redémarrage des clusters. Il faudra donc modifier ce commutateur en mode externe.
 
 ## Génération des clusters
 
@@ -127,9 +127,9 @@ $ docker service create \
 Le visualizer est accessible à l’adresse ip du manager1 sur le port 8080
 
 ## Installer son application
-Pour pouvoir déployer son application dans le Swarm, il est nécessaire d’uploader les images de ses containers dans les repository docker. Il est aussi possible d’utiliser les registre en locale pour gérer ce type d’action.
+Pour pouvoir déployer son application dans le Swarm, il est nécessaire d’uploader les images de ces containers dans les repository docker. Il est aussi possible d’utiliser les registres en locale pour gérer ce type d’action.
 
-Mon application étant constituer en deux couches, j’ai généré deux repository différents. Un pour la partie base de données et un pour la partie back.
+Mon application étant constitué en deux couches, j’ai généré deux repository différents. Un pour la partie base de données et un pour la partie back.
 
 Pour pousser une image sur les repos docker il faut procéder de la manière suivante :
 ```
@@ -142,7 +142,7 @@ $ docker tag ${name_image} ${name_repo}
 $ docker push mirha/db
 ```
 
-Une fois les images poussés sur les repos, il suffit simplement d’instancier le service dans le swarm. Il faut donc se connecter en SSH au manager1 et créer les services.
+Une fois les images poussées sur les repos, il suffit simplement d’instancier le service dans le swarm. Il faut donc se connecter en SSH au manager1 et créer les services.
 
 Attention, par défaut un service sera instancié sur un réseau unitaire (bridge). Pour permettre à vos containers de communiquer, il faut utiliser un réseau de type overlay.
 
@@ -164,7 +164,7 @@ $ docker service scale ${name}=${number}
 ## Mise en place d'un front ReactJS
 Installer Node.js
 
-Si des problèmes de certificat sont remontés lors de l’installation du package create-react-app supprimer la vérification ssl
+Si des problèmes de certificat sont remontés lors de l’installation du package create-react-app, supprimer la vérification ssl
 ```
 $ npm config set strict-ssl false
 ```
@@ -178,7 +178,21 @@ Une fois l’image créée, il suffit d’instancier un nouveau service que l’
 
 Le front est maintenant accessible.
 
-Pour relier le back et le front, récupérer la liste des utilisateurs ainsi que le détail de l’application que lequel on se trouve (REST).
+Pour relier le back et le front, récupérer la liste des utilisateurs ainsi que le détail de l’application sur lequel on se trouve (REST).
+
+## Les axes d'amélioration
+
+Pour le moment l'interconnexion des services ne fonctionne pas sur le nom des services. Un travail supplémentaire sur le fonctionnement DNS des services dans Swarm est nécessaire.
+
+Lors de l'extinction du PC, le cluster devient erroné et nécessite une réinstallation compléte de celui-ci. Un systeme de backup serait à prévoir.
+
+La taille des images peut devenir importante? L'upload sur le repo docker peut être fastidieu. Pour accélérer ce processus, l'installation d'un registre en local pour faciliter ce type de processus.
+
+Avec du temps supplémentaire, l'installation d'une intégration continue au sein du Swarm aurait permit une automatisation compléte de la monté de version d'une application.
 
 ## Bibliographie
 **Docker Swarm** : https://medium.com/@Grigorkh/docker-swarm-tutorial-c5d5cf4b4de
+
+## Repository
+- Back : https://github.com/Miratons/Orchestration
+- Front : https://github.com/Miratons/Orchestration-web
